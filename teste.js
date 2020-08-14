@@ -1,45 +1,35 @@
-
-//Fazer a soma de dois numeros
-function calculo1(x, y) {
-    return x + y;
-}
-
-//Fazer a subtracao de dois numeros
-function calculo2(x, y) {
-    return x - y;
-}
-
-//Fazer a multiplicacao de dois numeros
-function calculo3(x, y) {
-    return x * y;
-}
-
-//Fazer a divisao de dois numeros
-function calculo4(x, y) {
-    return x / y;
-}
-
-var manager = {
-  execute: function(name, x, y) {
-    if (name == "calculo1") {
-      return calculo1(x, y);
-    } else if (name == "calculo2") {
-        return calculo2(x, y);
-    }else if (name == "calculo3") {
-        return calculo3(x, y);
-    } else if (name == "calculo4") {
-        return calculo4(x, y);
+// objeto com funções
+var calculos = {
+    somar: function(x, y) {
+      return x + y;
+    },
+    subtrair: function(x, y) {
+      return x - y;
+    },
+    multiplicar: function(x, y) {
+      return x * y;
+    },
+    dividir: function(x, y) {
+      return x / y;
     }
-    return false;
-  }
-};
+  };
+  
+  var manager = {
+    execute: function(name) {
+      if (name in calculos) {
+        return calculos[name].apply(calculos, [].slice.call(arguments, 1));
+      }
+      return false;
+    }
+  };
+  
 
+  console.log(manager.execute("somar", 10, 5));
+ 
+  console.log(manager.execute("subtrair", 10, 5));
 
-console.log(manager.execute("calculo1", 10, 5));
+  console.log(manager.execute("multiplicar", 10, 5));
 
-console.log(manager.execute("calculo2", 10, 5));
-
-console.log(manager.execute("calculo3", 10, 5));
-
-console.log(manager.execute("calculo4", 10, 5));
-
+  console.log(manager.execute("dividir", 10, 5));
+  
+  // correto com o uso do objeto podemos transportar os argumentos restantes invocando as funções. com uma execução mais simples.
